@@ -1,11 +1,13 @@
 import ProductModel from '../models/productSchema.js';
 
+// GET
 export const getProducts = async (_, res) => {
   try {
     const data = await ProductModel.find({});
 
-    const filteredData = data
-    .filter((product) => product._doc.isActive === true);
+    const filteredData = data.filter(
+      (product) => product._doc.isActive === true,
+    );
 
     res.json({ data: filteredData, message: 'Products found' });
   } catch (e) {
@@ -18,6 +20,7 @@ export const getProducts = async (_, res) => {
   }
 };
 
+// POST
 export const postProducts = async (req, res) => {
   const { body } = req;
 
@@ -57,6 +60,7 @@ export const postProducts = async (req, res) => {
   }
 };
 
+// PUT
 export const putProduct = async (req, res) => {
   const {
     body,
@@ -87,6 +91,38 @@ export const putProduct = async (req, res) => {
       return;
     }
 
+    res.status(500).json({
+      data: null,
+      message: 'An error occured updating the product',
+    });
+  }
+};
+
+// DELETE
+export const deleteProduct = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const action = await ProductModel.updateOne(
+      { _id: id, isActive: true },
+      { isActive: false },
+    );
+
+    if (action.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'No product found with that ID',
+      });
+      return;
+    }
+
+    res.json({
+      data: null,
+      message: 'The product was deleted successfully',
+    });
+  } catch (e) {
     res.status(500).json({
       data: null,
       message: 'An error occured updating the product',
