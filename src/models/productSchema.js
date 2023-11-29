@@ -24,6 +24,7 @@ const Product = new mongoose.Schema({
   },
   isAvailable: Boolean,
   isOrdered: Boolean,
+  isActive: Boolean,
 });
 
 export default mongoose.model('Products', Product);
