@@ -1,5 +1,12 @@
 import express from 'express';
-import { deleteProduct, getProducts, postProducts, putProduct } from '../controllers/productControllers.js';
+import {
+  deleteProduct,
+  getProducts,
+  postProducts,
+  putProduct,
+} from '../controllers/productControllers.js';
+import { post_productSchema } from '../helpers/validationSchemas/productSchemas.js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 const router = express.Router();
 
@@ -7,10 +14,18 @@ const router = express.Router();
 router.get('/', getProducts);
 
 // POST
-router.post('/', postProducts);
+router.post(
+  '/',
+  (req, res, next) => validateBody(req, res, next, post_productSchema),
+  postProducts,
+);
 
 // PUT
-router.put('/:id', putProduct);
+router.put(
+  '/:id',
+  (req, res, next) => validateBody(req, res, next, post_productSchema),
+  putProduct,
+);
 
 // DELETE
 router.delete('/:id', deleteProduct);
