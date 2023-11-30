@@ -2,6 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
+import productsRouter from './routes/productsRoutes.js';
+
 // conexion con la DB
 import './database/database.js';
 
@@ -17,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // // 4.Rutas
-// app.use('/api/v1/blogs', productsRouter);
+app.use(productsRouter);
 
 // 5. Iniciar el loop del servidor
 app.listen(PORT, () => {
