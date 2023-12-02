@@ -83,8 +83,18 @@ export const putUser = async (req, res) => {
       return;
     }
 
+    const user = await UserModel.findOne({ _id: id });
+
+    const filteredData = {
+      id: user._doc._id,
+      firstname: user._doc.firstname,
+      lastname: user._doc.lastname,
+      email: user._doc.email,
+      isAdmin: user._doc.isAdmin,
+    };
+
     res.json({
-      data: null,
+      data: filteredData,
       message: 'The user has been successfully updated',
     });
   } catch (e) {

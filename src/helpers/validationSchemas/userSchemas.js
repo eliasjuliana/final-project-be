@@ -70,7 +70,7 @@ export const put_userSchema = Joi.object({
     .min(3)
     .max(30)
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{8,})$/,
     )
     .messages({
       'string.min': 'The firstname field must be at least 3 characters',

@@ -10,7 +10,8 @@ export const postLogin = async (req, res) => {
   } = req;
 
   try {
-    const userInDB = await UserDB.find({ email, isActive: true });
+    const userInDB = await UserDB.findOne({ email, isActive: true });
+    console.log(password, userInDB.password);
 
     // El usuario existe? la contraseña es la misma?
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
@@ -43,6 +44,7 @@ export const postLogin = async (req, res) => {
       message: 'Usuario logueado exitosamente',
     });
   } catch (e) {
+    console.log(e);
     res.status(500).json({
       data: null,
       message: 'Ocurrió un error en el inicio de sesión',
