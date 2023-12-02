@@ -10,7 +10,7 @@ export const postLogin = async (req, res) => {
   } = req;
 
   try {
-    const userInDB = await UserDB.findOne({ email, isActive: true });
+    const userInDB = await UserDB.find({ email, isActive: true });
 
     // El usuario existe? la contraseña es la misma?
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {

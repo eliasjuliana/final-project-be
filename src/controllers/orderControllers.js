@@ -9,11 +9,7 @@ export const getOrders = async (_, res) => {
     .filter((order) => order._doc.isActive === true)
     .map((order) => ({
       id: order._doc._id,
-      name: order._doc.name,
-      image: order._doc.image,
-      price: order._doc.price,
-      description: order._doc.description,
-      amount: order._doc.amount,
+      productsOrdered: order._doc.productsOrdered,
       userId: order._doc.userId,
     }));
 
