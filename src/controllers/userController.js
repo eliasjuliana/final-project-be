@@ -10,7 +10,7 @@ export const getUsers = async (_, res) => {
       id: user._doc._id,
       firstname: user._doc.firstname,
       lastname: user._doc.lastname,
-      username: user._doc.username,
+      email: user._doc.email,
       isAdmin: user._doc.isAdmin,
     }));
 
@@ -31,7 +31,7 @@ export const postUser = async (req, res) => {
   const newUser = new UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
-    username: body.username,
+    email: body.email,
     password: hashedPassword,
     isActive: true,
     isAdmin: false,
@@ -45,10 +45,11 @@ export const postUser = async (req, res) => {
       message: 'User created successfully',
     });
   } catch (e) {
+    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'Username is already in use',
+        message: 'Email is already in use',
       });
       return;
     }
@@ -90,7 +91,7 @@ export const putUser = async (req, res) => {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'Username is already in use',
+        message: 'Email is already in use',
       });
       return;
     }
