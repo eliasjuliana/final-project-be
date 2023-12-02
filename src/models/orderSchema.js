@@ -24,9 +24,6 @@ const Order = new mongoose.Schema({
     },
     isAvailable: Boolean,
   }],
-  tablenumber: {
-    type: Number,
-  },
   userId: {
     type: String,
     required: true,

@@ -5,9 +5,16 @@ export const getProducts = async (_, res) => {
   try {
     const data = await ProductModel.find({});
 
-    const filteredData = data.filter(
-      (product) => product._doc.isActive === true,
-    );
+    const filteredData = data
+      .filter((product) => product._doc.isActive === true)
+      .map((product) => ({
+        id: product._doc._id,
+        name: product._doc.name,
+        image: product._doc.image,
+        price: product._doc.price,
+        description: product._doc.description,
+        amount: product._doc.amount,
+      }));
 
     res.json({ data: filteredData, message: 'Products found' });
   } catch (e) {

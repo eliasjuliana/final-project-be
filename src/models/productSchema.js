@@ -23,7 +23,6 @@ const Product = new mongoose.Schema({
     required: true,
   },
   isAvailable: Boolean,
-  isOrdered: Boolean,
   isActive: Boolean,
 });
 
