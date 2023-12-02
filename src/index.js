@@ -12,7 +12,7 @@ import './database/database.js';
 const app = express();
 
 // 2. Configuraciones generales
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 // 3. Middlewares
 app.use(morgan('dev'));
