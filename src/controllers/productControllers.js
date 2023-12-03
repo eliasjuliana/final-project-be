@@ -52,6 +52,7 @@ export const postProducts = async (req, res) => {
       message: 'Product added succesfully',
     });
   } catch (e) {
+    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
