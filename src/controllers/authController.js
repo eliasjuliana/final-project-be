@@ -7,11 +7,12 @@ const { JWT_SECRET_KEY } = process.env;
 
 export const postLogin = async (req, res) => {
   const {
-    body: { username, password },
+    body: { email, password },
   } = req;
 
   try {
-    const userInDB = await UserDB.findOne({ username, isActive: true });
+    const userInDB = await UserDB.findOne({ email, isActive: true });
+    console.log(password, userInDB.password);
 
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
       res.status(400).json({
@@ -26,7 +27,7 @@ export const postLogin = async (req, res) => {
         id: userInDB._doc._id,
         firstname: userInDB._doc.firstname,
         lastname: userInDB._doc.lastname,
-        username: userInDB._doc.email,
+        email: userInDB._doc.email,
         isAdmin: userInDB._doc.isAdmin,
       },
     };
@@ -40,6 +41,7 @@ export const postLogin = async (req, res) => {
       message: 'User successfully logged in',
     });
   } catch (e) {
+    console.log(e);
     res.status(500).json({
       data: null,
       message: 'An error occurred during login',

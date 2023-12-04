@@ -4,6 +4,7 @@ import {
   deleteUser,
   getUsers,
   postUser,
+  putPassword,
   putUser,
 } from '../controllers/userController.js';
 
@@ -32,6 +33,15 @@ router.put(
   putUser,
 );
 
+// PUT PASSWORD
+router.put(
+  '/put-password/:id',
+  isAuthenticated,
+  // (req, res, next) => validateBody(req, res, next, put_userSchema),
+  putPassword,
+);
+
 router.delete('/:id', isAuthenticated, deleteUser);
 
 export default router;
+

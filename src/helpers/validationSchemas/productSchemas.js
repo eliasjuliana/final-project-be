@@ -62,13 +62,16 @@ export const put_productSchema = Joi.object({
     'any.required': 'The "amount" field is required.',
     '*': 'Check the "amount" field.',
   }),
+  isAvailable: Joi.boolean().messages({
+    '*': 'Check the "amount" field',
+  }),
 }).custom((value, helper) => {
   const {
-    name, image, price, description,
+    name, image, price, description, isAvailable,
 } = value;
 
-  if (!name && !image && !price && !description) {
-    return helper.message('At least one field must be present in the body.');
+  if (!name && !image && !price && !description && !isAvailable) {
+    return helper.message('At least one field must be present in the body');
   }
 
   return true;

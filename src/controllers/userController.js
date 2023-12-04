@@ -10,7 +10,7 @@ export const getUsers = async (_, res) => {
       id: user._doc._id,
       firstname: user._doc.firstname,
       lastname: user._doc.lastname,
-      username: user._doc.username,
+      email: user._doc.email,
       isAdmin: user._doc.isAdmin,
     }));
 
@@ -31,7 +31,7 @@ export const postUser = async (req, res) => {
   const newUser = new UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
-    username: body.username,
+    email: body.email,
     password: hashedPassword,
     isActive: true,
     isAdmin: false,
@@ -45,10 +45,11 @@ export const postUser = async (req, res) => {
       message: 'User created successfully',
     });
   } catch (e) {
+    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'Username is already in use',
+        message: 'Email is already in use',
       });
       return;
     }
@@ -82,15 +83,25 @@ export const putUser = async (req, res) => {
       return;
     }
 
+    const user = await UserModel.findOne({ _id: id });
+
+    const filteredData = {
+      id: user._doc._id,
+      firstname: user._doc.firstname,
+      lastname: user._doc.lastname,
+      email: user._doc.email,
+      isAdmin: user._doc.isAdmin,
+    };
+
     res.json({
-      data: null,
+      data: filteredData,
       message: 'The user has been successfully updated',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'Username is already in use',
+        message: 'Email is already in use',
       });
       return;
     }
@@ -98,6 +109,52 @@ export const putUser = async (req, res) => {
     res.status(500).json({
       data: null,
       message: 'An error occurred updating the user',
+    });
+  }
+};
+
+export const putPassword = async (req, res) => {
+  const {
+    body: { data, user },
+  } = req;
+
+  const { password } = data;
+  const { id } = user;
+
+  if (!password) {
+    res.status(400).json({
+      data: null,
+      message: 'Password is required for password update',
+    });
+    return;
+  }
+
+  try {
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    // const action = await UserModel.updateOne({ _id: id });
+    const action = await UserModel.updateOne(
+      { _id: id },
+      { $set: { password: hashedPassword } },
+    );
+
+    if (action.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'A user with that id was not found',
+      });
+      return;
+    }
+
+    res.json({
+      data: { password: hashedPassword },
+      message: 'The password has been successfully updated',
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      data: null,
+      message: 'An error occurred resetting the password',
     });
   }
 };
