@@ -55,8 +55,8 @@ Main route: `/api/v1/users`
 | ------ | -------- | --------- | -------------- | ----------- | ---- |
 | GET | `/` | ✅ | ✅ | Get all users | - |
 | GET | `/:id` | ✅ | ❌ | Gets a user by their id | - |
-| POST | `/` | ❌ | ❌ | Create a new user | `{ lastname: string, firstname: string, password: string, username: string }` |
-| PUT | `/:id` | ✅ | ❌ | Update a user by their id | `{ isAdmin?: boolean, lastname?: string, firstname?: string, password?: string, username?: string }` |
+| POST | `/` | ❌ | ❌ | Create a new user | `{ firstname: string, lastname: string, email: string, password: string, isAdmin: boolean, isActive: boolean }` |
+| PUT | `/:id` | ✅ | ❌ | Update a user by their id | `{ firstname?: string, lastname?: string, email?: string, password?: string, isAdmin?: boolean, isActive?: boolean }` |
 | DELETE | `/:id` | ✅ | ❌ | Delete a user by their id (logical deletion) | - |
 
 #### Authentication:
