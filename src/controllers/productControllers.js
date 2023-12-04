@@ -6,7 +6,7 @@ export const getProducts = async (_, res) => {
     const data = await ProductModel.find({});
 
     const filteredData = data
-      // .filter((product) => product._doc.isActive === true)
+      .filter((product) => product._doc.isActive === true)
       .map((product) => ({
         id: product._doc._id,
         name: product._doc.name,
@@ -14,6 +14,7 @@ export const getProducts = async (_, res) => {
         price: product._doc.price,
         description: product._doc.description,
         amount: product._doc.amount,
+        isAvailable: product._doc.isAvailable,
       }));
 
     res.json({ data: filteredData, message: 'Products found' });
@@ -39,8 +40,7 @@ export const postProducts = async (req, res) => {
     price: body.price,
     description: body.description,
     amount: body.amount,
-    isAvailable: true,
-    isOrdered: false,
+    isAvailable: false,
     isActive: true,
   });
 
@@ -133,7 +133,7 @@ export const deleteProduct = async (req, res) => {
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'An error occured updating the product',
+      message: 'An error occurred updating the product',
     });
   }
 };
