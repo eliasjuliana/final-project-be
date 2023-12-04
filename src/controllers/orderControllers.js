@@ -1,6 +1,5 @@
 import OrderModel from '../models/orderSchema.js';
 
-// GET
 export const getOrders = async (_, res) => {
   try {
     const data = await OrderModel.find({});
@@ -15,16 +14,13 @@ export const getOrders = async (_, res) => {
 
     res.status(500).json({
       data: null,
-      message: 'An error occured while connecting to the DB',
+      message: 'An error occurred while connecting to the database',
     });
   }
 };
 
-// POST
 export const postOrder = async (req, res) => {
   const { body } = req;
-
-  /* traigo BODY del FrontEnd */
 
   const newOrder = new OrderModel({
     productsOrdered: body.productsOrdered,
@@ -45,7 +41,7 @@ export const postOrder = async (req, res) => {
 
     res.status(500).json({
       data: null,
-      message: 'An error occured while posting the order',
+      message: 'An error occurred while posting the order',
     });
   }
 };
