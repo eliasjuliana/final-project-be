@@ -11,19 +11,19 @@ export const post_userSchema = Joi.object({
     }),
   username: Joi.string().trim().min(3).max(30)
     .required()
+    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .messages({
-      'string.min': 'The firstname field must be at least 3 characters',
-      'string.max': 'The firstname field must be at most 30 characters',
-      'any.required': 'The username field is required',
+      'any.required': 'The email field is required',
+      'string.pattern.base': 'The "email" field must be an email',
       '*': 'Check the username field',
     }),
   lastname: Joi.string().trim().min(3).max(30)
     .required()
     .messages({
-      'string.min': 'The firstname field must be at least 3 characters.',
-      'string.max': 'The firstname field must be at most 30 characters.',
-      'any.required': 'The lastname field is required.',
-      '*': 'Check the lastname field.',
+      'string.min': 'The firstname field must be at least 3 characters',
+      'string.max': 'The firstname field must be at most 30 characters',
+      'any.required': 'The lastname field is required',
+      '*': 'Check the lastname field',
     }),
   password: Joi.string()
     .trim()
@@ -31,7 +31,7 @@ export const post_userSchema = Joi.object({
     .max(30)
     .required()
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{8,})$/,
     )
     .messages({
       'string.min': 'The firstname field must be at least 3 characters.',
@@ -67,7 +67,7 @@ export const put_userSchema = Joi.object({
     .min(3)
     .max(30)
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{8,})$/,
     )
     .messages({
       'string.min': 'The firstname field must be at least 3 characters.',
@@ -78,10 +78,10 @@ export const put_userSchema = Joi.object({
     }),
 }).custom((value, helper) => {
   const {
-    firstname, lastname, username, password,
+    firstname, lastname, email, password,
   } = value;
 
-  if (!firstname && !lastname && !username && !password) {
+  if (!firstname && !lastname && !email && !password) {
     return helper.message('At least one field must be present in the body.');
   }
 

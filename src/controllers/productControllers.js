@@ -4,9 +4,17 @@ export const getProducts = async (_, res) => {
   try {
     const data = await ProductModel.find({});
 
-    const filteredData = data.filter(
-      (product) => product._doc.isActive === true,
-    );
+    const filteredData = data
+      .filter((product) => product._doc.isActive === true)
+      .map((product) => ({
+        id: product._doc._id,
+        name: product._doc.name,
+        image: product._doc.image,
+        price: product._doc.price,
+        description: product._doc.description,
+        amount: product._doc.amount,
+        isAvailable: product._doc.isAvailable,
+      }));
 
     res.json({ data: filteredData, message: 'Products found' });
   } catch (e) {
@@ -28,8 +36,7 @@ export const postProducts = async (req, res) => {
     price: body.price,
     description: body.description,
     amount: body.amount,
-    isAvailable: true,
-    isOrdered: false,
+    isAvailable: false,
     isActive: true,
   });
 
@@ -41,6 +48,7 @@ export const postProducts = async (req, res) => {
       message: 'Product added succesfully',
     });
   } catch (e) {
+    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,

@@ -4,7 +4,6 @@ const Product = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   image: {
     type: String,
@@ -20,10 +19,8 @@ const Product = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    required: true,
   },
   isAvailable: Boolean,
-  isOrdered: Boolean,
   isActive: Boolean,
 });
 
