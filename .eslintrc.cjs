@@ -15,6 +15,5 @@ module.exports = {
       'no-unused-vars': 2,
       'space-unary-ops': 'off',
     },
-    // "linebreak-style": ["error", "unix"],
     ignorePatterns: ['**/node_modules/**', '**/dist/**'],
   };
