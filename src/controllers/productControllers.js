@@ -6,7 +6,7 @@ export const getProducts = async (_, res) => {
     const data = await ProductModel.find({});
 
     const filteredData = data
-      .filter((product) => product._doc.isActive === true)
+      // .filter((product) => product._doc.isActive === true)
       .map((product) => ({
         id: product._doc._id,
         name: product._doc.name,

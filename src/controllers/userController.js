@@ -113,6 +113,52 @@ export const putUser = async (req, res) => {
   }
 };
 
+export const putPassword = async (req, res) => {
+  const {
+    body: { data, user },
+  } = req;
+
+  const { password } = data;
+  const { id } = user;
+
+  if (!password) {
+    res.status(400).json({
+      data: null,
+      message: 'Password is required for password update',
+    });
+    return;
+  }
+
+  try {
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    // const action = await UserModel.updateOne({ _id: id });
+    const action = await UserModel.updateOne(
+      { _id: id },
+      { $set: { password: hashedPassword } },
+    );
+
+    if (action.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'A user with that id was not found',
+      });
+      return;
+    }
+
+    res.json({
+      data: { password: hashedPassword },
+      message: 'The password has been successfully updated',
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      data: null,
+      message: 'An error occurred resetting the password',
+    });
+  }
+};
+
 export const deleteUser = async (req, res) => {
   const {
     params: { id },
