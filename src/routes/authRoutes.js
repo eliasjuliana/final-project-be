@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { postLogin } from '../controllers/authController.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { post_loginSchema } from '../helpers/validationSchemas/loginSchemas.js';

@@ -1,12 +1,11 @@
 import ProductModel from '../models/productSchema.js';
 
-// GET
 export const getProducts = async (_, res) => {
   try {
     const data = await ProductModel.find({});
 
     const filteredData = data
-      // .filter((product) => product._doc.isActive === true)
+      .filter((product) => product._doc.isActive === true)
       .map((product) => ({
         id: product._doc._id,
         name: product._doc.name,
@@ -14,6 +13,7 @@ export const getProducts = async (_, res) => {
         price: product._doc.price,
         description: product._doc.description,
         amount: product._doc.amount,
+        isAvailable: product._doc.isAvailable,
       }));
 
     res.json({ data: filteredData, message: 'Products found' });
@@ -22,16 +22,13 @@ export const getProducts = async (_, res) => {
 
     res.status(500).json({
       data: null,
-      message: 'An error occured while connecting to the DB',
+      message: 'An error occurred while connecting to the database',
     });
   }
 };
 
-// POST
 export const postProducts = async (req, res) => {
   const { body } = req;
-
-  /* traigo BODY del FrontEnd */
 
   const newProduct = new ProductModel({
     name: body.name,
@@ -39,8 +36,7 @@ export const postProducts = async (req, res) => {
     price: body.price,
     description: body.description,
     amount: body.amount,
-    isAvailable: true,
-    isOrdered: false,
+    isAvailable: false,
     isActive: true,
   });
 
@@ -63,12 +59,11 @@ export const postProducts = async (req, res) => {
 
     res.status(500).json({
       data: null,
-      message: 'An error occured while posting the product',
+      message: 'An error occurred while posting the product',
     });
   }
 };
 
-// PUT
 export const putProduct = async (req, res) => {
   const {
     body,
@@ -101,12 +96,11 @@ export const putProduct = async (req, res) => {
 
     res.status(500).json({
       data: null,
-      message: 'An error occured updating the product',
+      message: 'An error occurred updating the product',
     });
   }
 };
 
-// DELETE
 export const deleteProduct = async (req, res) => {
   const {
     params: { id },
@@ -133,7 +127,7 @@ export const deleteProduct = async (req, res) => {
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'An error occured updating the product',
+      message: 'An error occurred updating the product',
     });
   }
 };
