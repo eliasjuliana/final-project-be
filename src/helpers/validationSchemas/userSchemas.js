@@ -9,13 +9,13 @@ export const post_userSchema = Joi.object({
       'any.required': 'The firstname field is required.',
       '*': 'Check the firstname field.',
     }),
-  username: Joi.string().trim().min(3).max(30)
+  email: Joi.string().trim().min(3).max(30)
     .required()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .messages({
       'any.required': 'The email field is required',
       'string.pattern.base': 'The "email" field must be an email',
-      '*': 'Check the username field',
+      '*': 'Check the email field',
     }),
   lastname: Joi.string().trim().min(3).max(30)
     .required()
@@ -50,11 +50,11 @@ export const put_userSchema = Joi.object({
       'string.max': 'The firstname field must be at most 30 characters.',
       '*': 'Check the firstname field.',
     }),
-  username: Joi.string().trim().min(3).max(30)
+  email: Joi.string().trim().min(3).max(30)
     .messages({
       'string.min': 'The firstname field must be at least 3 characters.',
       'string.max': 'The firstname field must be at most 30 characters.',
-      '*': 'Check the username field.',
+      '*': 'Check the email field.',
     }),
   lastname: Joi.string().trim().min(3).max(30)
     .messages({

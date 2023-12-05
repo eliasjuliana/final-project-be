@@ -64,7 +64,7 @@ Main route: `/api/v1/users`
 Main route: `/api/v1/auth`
 | Method | Endpoint | Protected | Must be Admin | Description | Body |
 | ------ | -------- | --------- | -------------- | ----------- | ---- |
-| POST | `/login` | ❌ | ❌ |Sign in with a user | `{ password: string, username: string }` |
+| POST | `/login` | ❌ | ❌ |Sign in with a user | `{ password: string, email: string }` |
 
 #### Products:
 
