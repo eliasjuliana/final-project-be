@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import UserModel from '../models/userSchema.js';
+import { sendWelcomeEmail } from '../helpers/emails.js';
 
 export const getUsers = async (_, res) => {
   try {
@@ -39,6 +40,7 @@ export const postUser = async (req, res) => {
 
   try {
     await newUser.save();
+    await sendWelcomeEmail(newUser);
 
     res.status(201).json({
       data: null,
