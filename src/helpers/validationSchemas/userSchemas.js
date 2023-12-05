@@ -81,7 +81,7 @@ export const put_userSchema = Joi.object({
     firstname, lastname, email, password,
   } = value;
 
-  if (!firstname && !lastname && !username && !password) {
+  if (!firstname && !lastname && !email && !password) {
     return helper.message('At least one field must be present in the body.');
   }
 

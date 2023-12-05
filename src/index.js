@@ -11,7 +11,6 @@ import './database/database.js';
 
 const app = express();
 
-// 2. Configuraciones generales
 const PORT = process.env.PORT || 5000;
 
 app.use(morgan('dev'));

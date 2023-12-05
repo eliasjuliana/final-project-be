@@ -132,7 +132,6 @@ export const putPassword = async (req, res) => {
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    // const action = await UserModel.updateOne({ _id: id });
     const action = await UserModel.updateOne(
       { _id: id },
       { $set: { password: hashedPassword } },

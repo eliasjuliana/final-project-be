@@ -19,7 +19,6 @@ const Product = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    // required: true,
   },
   isAvailable: Boolean,
   isActive: Boolean,
