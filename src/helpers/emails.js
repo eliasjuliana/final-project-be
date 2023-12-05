@@ -1,13 +1,16 @@
 import nodemailer from 'nodemailer';
 
+const emailUserUrl = process.env.EMAIL_USER;
+const pass = process.env.EMAIL_PASSWORD;
+
 export const sendWelcomeEmail = async (user) => {
   try {
     // Configurar nodemailer (asegúrate de configurar tu cuenta SMTP)
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: emailUserUrl,
+        pass,
       },
       secure: true, // Puedes probar cambiando esto a 'false'
       tls: {

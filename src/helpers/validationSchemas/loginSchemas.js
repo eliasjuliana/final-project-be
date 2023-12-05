@@ -8,7 +8,7 @@ export const post_loginSchema = Joi.object({
     .messages({
       'any.required': 'The email field is required',
       'string.pattern.base': 'The "email" field must be an email',
-      '*': 'Check the username field',
+      '*': 'Check the email field',
     }),
     password: Joi.string()
     .trim()

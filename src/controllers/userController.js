@@ -26,6 +26,7 @@ export const getUsers = async (_, res) => {
 
 export const postUser = async (req, res) => {
   const { body } = req;
+  console.log(body);
 
   const hashedPassword = bcrypt.hashSync(body.password, 10);
 
@@ -40,7 +41,7 @@ export const postUser = async (req, res) => {
 
   try {
     await newUser.save();
-    await sendWelcomeEmail(newUser);
+    // await sendWelcomeEmail(newUser);
 
     res.status(201).json({
       data: null,
