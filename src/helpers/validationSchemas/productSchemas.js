@@ -27,8 +27,8 @@ export const post_productSchema = Joi.object({
     'any.required': 'The "description" field is required.',
     '*': 'Check the "description" field.',
   }),
-  amount: Joi.number().required().messages({
-    'any.required': 'The "amount" field is required.',
+  amount: Joi.number().messages({
+    // 'any.required': 'The "amount" field is required.',
     '*': 'Check the "amount" field.',
   }),
 });
