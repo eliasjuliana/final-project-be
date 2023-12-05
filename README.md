@@ -4,23 +4,23 @@
 
 The final project of Rolling Code School, commission 63i, consists of creating a website inspired by fast food ordering applications for food restaurants.
 
-## Used technology
+## Used technology:
 
-It is necessary to have Node.js 20.6+ installed on the PC, and a MongoDB account to connect to your own, hosted or local DB; Express, etc.
+It is necessary to have Node.js 20.6+ installed on the PC, and a MongoDB account to connect to your own, hosted or local database; Express, etc.
 
 - [Node.js](https://nodejs.org/en/) 
 - [MongoDB](https://www.mongodb.com/)
 
-## Facility
+## Facility:
 
 1. Clone this repository.
 2. Run `npm install` to install the dependencies.
 
-## Configuration
+## Configuration:
 
 - Create a `.env` file in the project root and configure the necessary environment variables, which are defined in the `.env_sample` file.
 
-## Use
+## Use:
 
 - Option 1: Do the build
 
@@ -44,11 +44,11 @@ It is necessary to have Node.js 20.6+ installed on the PC, and a MongoDB account
    npm run dev
    ```
 
-## API documentation
+## API documentation:
 
 The table below details the endpoints of each available service:
 
-#### Usuarios: 
+#### Users: 
 
 Main route: `/api/v1/users`
 | Method | Endpoint | Protected | Must be Admin | Description | Body |
@@ -77,7 +77,7 @@ Main route: `/api/v1/products`
 | PUT | `/:id` | ✅ | ✅ | Update a product by its id | `{ description?: string, image?: string, name?: string, price?: number  }` |
 | DELETE | `/:id` | ✅ | ✅ | Delete a product by its id (logical deletion) | - |
 
-## Members
+## Members:
 
 - [Cardozo, Martín](https://github.com/CardozoMartin)
 -  [Deblinger, Bianca D.](https://github.com/biandeb)
