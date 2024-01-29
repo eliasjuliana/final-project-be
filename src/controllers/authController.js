@@ -12,7 +12,7 @@ export const postLogin = async (req, res) => {
 
   try {
     const userInDB = await UserDB.findOne({ email, isActive: true });
-    console.log(password, userInDB.password);
+    
 
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
       res.status(400).json({
@@ -41,7 +41,6 @@ export const postLogin = async (req, res) => {
       message: 'User successfully logged in',
     });
   } catch (e) {
-    console.log(e);
     res.status(500).json({
       data: null,
       message: 'An error occurred during login',

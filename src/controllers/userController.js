@@ -26,7 +26,6 @@ export const getUsers = async (_, res) => {
 
 export const postUser = async (req, res) => {
   const { body } = req;
-  console.log(body);
 
   const hashedPassword = bcrypt.hashSync(body.password, 10);
 
@@ -48,7 +47,6 @@ export const postUser = async (req, res) => {
       message: 'User created successfully',
     });
   } catch (e) {
-    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
@@ -153,7 +151,6 @@ export const putPassword = async (req, res) => {
       message: 'The password has been successfully updated',
     });
   } catch (e) {
-    console.log(e);
     res.status(500).json({
       data: null,
       message: 'An error occurred resetting the password',

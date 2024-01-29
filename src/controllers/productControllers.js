@@ -18,7 +18,6 @@ export const getProducts = async (_, res) => {
 
     res.json({ data: filteredData, message: 'Products found' });
   } catch (e) {
-    console.error(e);
 
     res.status(500).json({
       data: null,
@@ -48,7 +47,6 @@ export const postProducts = async (req, res) => {
       message: 'Product added succesfully',
     });
   } catch (e) {
-    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
