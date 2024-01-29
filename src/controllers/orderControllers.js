@@ -14,7 +14,6 @@ export const getOrders = async (_, res) => {
 
     res.json({ data: filteredData, message: 'Orders found' });
   } catch (e) {
-    console.error(e);
 
     res.status(500).json({
       data: null,
@@ -41,8 +40,6 @@ export const postOrder = async (req, res) => {
       message: 'Order added succesfully',
     });
   } catch (e) {
-    console.error(e);
-
     res.status(500).json({
       data: null,
       message: 'An error occurred while posting the order',
